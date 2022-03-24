@@ -16,26 +16,21 @@ library(tidyverse)
 # Load data files ---------------------------------------------------------
 
 # Extract folders
-unzip(zipfile = "../data/latinobarometro-1990s.zip", exdir = "../data")
 unzip(zipfile = "../data/latinobarometro-2000s.zip", exdir = "../data")
 unzip(zipfile = "../data/latinobarometro-2010s.zip", exdir = "../data")
-unzip(zipfile = "../data/latinobarometro-2020s.zip", exdir = "../data")
 
 # Read RData files
-load(file = "../data/latinobarometro-2020-r/latinobarometro-2020.rdata")
 load(file = "../data/latinobarometro-2017-r/latinobarometro-2017.rdata")
 load(file = "../data/latinobarometro-2016-r/latinobarometro-2016.rdata")
 load(file = "../data/latinobarometro-2015-r/latinobarometro-2015.rdata")
 load(file = "../data/latinobarometro-2013-r/latinobarometro-2013.rdata")
 
 # Rename data frames
-lb_2020_raw <- Latinobarometro_2020_Eng
 lb_2017_raw <- Latinobarometro2017Eng_v20180117
 lb_2016_raw <- Latinobarometro2016Eng_v20170205
 lb_2015_raw <- Latinobarometro_2015_Eng
 lb_2013_raw <- Latinobarometro2013Eng
 
-rm(Latinobarometro_2020_Eng)
 rm(Latinobarometro2017Eng_v20180117)
 rm(Latinobarometro2016Eng_v20170205)
 rm(Latinobarometro_2015_Eng)
@@ -59,45 +54,6 @@ lb_2008_raw <-
 # Select variables of interest --------------------------------------------
 
 # Define lists of variables
-
-lb_variables_2020 <-
-  c(
-    # identification number
-    "numentre",
-    # confidence in the police
-    "P13STGBS.B",
-    # victim of crime
-    "p64st",
-    # country identification
-    "idenpa",
-    # region/geographical area
-    "reg",
-    # age
-    "edad",
-    # gender
-    "sexo",
-    # race
-    "s12",
-    # marital status
-    # religion
-    "s10",
-    # years of education
-    "s16",
-    # employment status
-    "s24.a",
-    # general interpersonal trust
-    "p9stgbs",
-    # satisfaction with life
-    "p1st",
-    # satisfaction with democracy
-    "P11STGBS.A",
-    # confidence in the government
-    "p13st.e",
-    # confidence in the judiciary
-    "p13st.f",
-    # confidence in the political parties
-    "p13st.g"
-  )
 
 lb_variables_2018 <-
   c(
@@ -478,48 +434,6 @@ lb_variables_2008 <-
   )
 
 # Select and rename variables and add a corresponding year variable
-
-lb_2020 <- lb_2020_raw %>%
-  # Select columns of interest
-  select(all_of(lb_variables_2020)) %>%
-  # Rename columns
-  rename(
-    id = numentre,
-    trust_police = P13STGBS.B,
-    victim = p64st,
-    country = idenpa,
-    region = reg,
-    age = edad,
-    gender = sexo,
-    race = s12,
-    religion = s10,
-    education = s16,
-    employment = s24.a,
-    trust = p9stgbs,
-    satisfaction_life = p1st,
-    satisfaction_democracy = P11STGBS.A,
-    trust_government = p13st.e,
-    trust_judiciary = p13st.f,
-    trust_parties = p13st.g
-  ) %>%
-  # Add year column
-  mutate(year = 2020, .before = id) %>%
-  # Rewrite id column
-  mutate(# Remove space between year and row number create by the paste function
-    id = gsub(" ",
-              "",
-              # Concatenate the year and the row number to form a unique id
-              # number
-              paste(
-                year, formatC(
-                  row_number(),
-                  width = 5,
-                  format = "d",
-                  flag = "0"
-                )
-              )
-    )
-  )
 
 lb_2018 <- lb_2018_raw %>%
   # Select columns of interest
@@ -920,7 +834,6 @@ lb_2008 <- lb_2008_raw %>%
 
 # Change variable data types ----------------------------------------------
 
-lb_2020 <- lapply(lb_2020, as.numeric)
 lb_2018 <- lapply(lb_2018, as.numeric)
 lb_2017 <- lapply(lb_2017, as.numeric)
 lb_2016 <- lapply(lb_2016, as.numeric)
