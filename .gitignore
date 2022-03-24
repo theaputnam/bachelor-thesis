@@ -23,6 +23,5 @@ latinobarometro-2018-r/
 latinobarometro-2020-r/
 
 # R
-*.RData
 *.RDataTmp
 *.Rhistory
