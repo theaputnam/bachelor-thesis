@@ -1,0 +1,28 @@
+# Data folders
+latinobarometro-1995-spss/
+latinobarometro-1996-spss/
+latinobarometro-1997-spss/
+latinobarometro-1998-spss/
+latinobarometro-2000-spss/
+latinobarometro-2001-spss/
+latinobarometro-2002-spss/
+latinobarometro-2003-spss/
+latinobarometro-2004-spss/
+latinobarometro-2005-spss/
+latinobarometro-2006-spss/
+latinobarometro-2007-spss/
+latinobarometro-2008-spss/
+latinobarometro-2009-spss/
+latinobarometro-2010-spss/
+latinobarometro-2011-spss/
+latinobarometro-2013-r/
+latinobarometro-2015-r/
+latinobarometro-2016-r/
+latinobarometro-2017-r/
+latinobarometro-2018-r/
+latinobarometro-2020-r/
+
+# R
+*.RData
+*.RDataTmp
+*.Rhistory

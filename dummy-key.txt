@@ -1,0 +1,110 @@
+trust_police
+	1 = alot of confidence, some confidence
+	0 = little confidence, no confidence
+
+victim
+	1 = victim of crime
+	0 = otherwise
+
+relative_victim
+	1 = relative victim of crime
+	0 = otherwise
+
+gender
+	1 = female
+	0 = male
+
+white
+	1 = white
+	0 = asian, black, indigenous, Mestizo, Mulatoother 
+
+marriage
+	1 = married/living with partner
+	0 = single, separated/divorced/widowed
+
+catholic
+	1 = catholic
+	0 = other
+
+employed
+	1 = employed
+	0 = retired/temporarily out of work/student/don't work and housework
+unemployed
+	1 = unemployed
+	0 = retired/student/housework/no work/employed
+
+trust_dummy
+	1 = most people can be trusted
+	0 = one can never be too careful when dealing with others
+
+sufficient_income (subjective income)
+	1 = sufficient income and can save
+	0 = otherwise
+
+insufficient_income
+	1 = insificient income and has big problems
+
+life_satisfaction
+
+	1 = very satisfied, fairly satisfied
+	0 = not very satisfied, not at all satisfied
+
+democracy_satisfaction
+	1 = very satisfied, rather satisfied
+	0 = not very satisfied, not at all satisfied
+
+government_trust
+	1 = alot of confidence, some confidence
+	0 = little confidence, no confidence at all
+
+judiciary_trust
+	1 = alot of confidence, some confidence
+	0 = little confidence, no confidence at all
+
+political_party
+	1 = alot of confidence, some confidence
+	0 = little confidence, no confidence at all
+
+high_school
+	1 = completed high school
+	0 = did not complete highschool
+
+university
+	1 = completed university
+	0 = did not complete university
+
+year dummies for 2008-2017 (no dummy for 2018) 
+	1 = if year of dummy
+	0 = otherwise
+
+country dummies (no Brazil dummy)
+	1 = if country of dummy
+	0 = otherwise
+
+countries used
+	32 = Argentina
+	68 = Bolivia
+	76 = Brasil
+	152 = Chile
+	170 = Colombia
+	188 = Costa Rica
+	214 = Rep. Dominicana
+	218 = Ecuador
+	222 = El Salvador
+	320 = Guatemala
+	340 = Honduras
+	484 = Mexico
+	558 = Nicaragua
+	591 = Panama
+	600 = Paraguay
+	604 = Peru
+	858 = Uruguay
+	862 = Venezuela
+
+
+724 = Espana (no data withoput null values)
+2012 no data
+2006-7 asked different victim question
+race not asked before 2008
+2020 no marital status
+
