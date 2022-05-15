@@ -10,5 +10,6 @@ latinobarometro-2017-r/
 latinobarometro-2018-r/
 
 # R
-*.RDataTmp
-*.Rhistory
+.RData
+.RDataTmp
+.Rhistory

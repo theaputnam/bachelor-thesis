@@ -14,6 +14,8 @@ library(tidyverse)
 
 load("../data/latinobarometro.RData")
 
+unique(lb$country)
+
 attach(lb)
 
 
@@ -267,7 +269,7 @@ unique(satisfaction_life)
 # -2 = no answer
 # -4 not asked
 
-      
+
 lb <- lb %>%
   mutate(
     satisfaction_life_dummy = case_when(
@@ -585,12 +587,29 @@ lb <- lb %>%
     )
   )
 
+# Year 2018
+lb <- lb %>%
+  mutate(
+    year_2018_dummy = case_when(
+      year == 2008 ~ 0,
+      year == 2009 ~ 0,
+      year == 2010 ~ 0,
+      year == 2011 ~ 0,
+      year == 2012 ~ 0,
+      year == 2013 ~ 0,
+      year == 2015 ~ 0,
+      year == 2016 ~ 0,
+      year == 2017 ~ 0,
+      year == 2018 ~ 1
+    )
+  )
+
 # Country dummies
 unique(country)
 
 # 32 = Argentina
 # 68 = Bolivia
-# 76 = Brasil
+# 76 = Brazil
 # 152 = Chile
 # 170 = Colombia
 # 188 = Costa Rica
@@ -604,7 +623,7 @@ unique(country)
 # 591 = Panama
 # 600 = Paraguay
 # 604 = Peru
-# 724 = Espana
+# 724 = Spain
 # 858 = Uruguay
 # 862 = Venezuela
 
@@ -641,6 +660,32 @@ lb <- lb %>%
       country == 32 ~ 0,
       country == 68 ~ 1,
       country == 76 ~ 0,
+      country == 152 ~ 0,
+      country == 170 ~ 0,
+      country == 188 ~ 0,
+      country == 214 ~ 0,
+      country == 218 ~ 0,
+      country == 222 ~ 0,
+      country == 320 ~ 0,
+      country == 340 ~ 0,
+      country == 484 ~ 0,
+      country == 558 ~ 0,
+      country == 591 ~ 0,
+      country == 600 ~ 0,
+      country == 604 ~ 0,
+      country == 724 ~ 0,
+      country == 858 ~ 0,
+      country == 862 ~ 0
+    )
+  )
+
+# 76 = Brazil dummy
+lb <- lb %>%
+  mutate(
+    brazil_dummy = case_when(
+      country == 32 ~ 0,
+      country == 68 ~ 0,
+      country == 76 ~ 1,
       country == 152 ~ 0,
       country == 170 ~ 0,
       country == 188 ~ 0,
@@ -1062,9 +1107,10 @@ lb_dummies <- lb_dummies %>%
   # Remove "_dummy" suffix from column names
   # "$" indicates that the string "_dummy" at the END of the string (column
   # name) should be replaced (in this case with an empty string)
-  rename_all( ~ stringr::str_replace(., "_dummy$", ""))
+  rename_all(~ stringr::str_replace(., "_dummy$", ""))
 
-
+lb_dummies <- lb_dummies %>%
+  select(-trust_parties)
 # Save dummy data frame ---------------------------------------------------
 
 save(lb_dummies, file = "../data/latinobarometro-dummies.RData")

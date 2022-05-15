@@ -26,6 +26,7 @@ load(file = "../data/latinobarometro-2015-r/latinobarometro-2015.rdata")
 load(file = "../data/latinobarometro-2013-r/latinobarometro-2013.rdata")
 
 # Rename data frames
+
 lb_2017_raw <- Latinobarometro2017Eng_v20180117
 lb_2016_raw <- Latinobarometro2016Eng_v20170205
 lb_2015_raw <- Latinobarometro_2015_Eng
@@ -93,8 +94,10 @@ lb_variables_2018 <-
     "P15STGBSC.F",
     # confidence in the political parties
     "P15STGBSC.G",
-    # subjective income 
-    "S4"
+    # subjective income
+    "S4",
+    # Most important problem of the country
+    "P3STGBSC"
   )
 
 lb_variables_2017 <-
@@ -136,7 +139,9 @@ lb_variables_2017 <-
     # confidence in the political parties
     "P14ST.G",
     # subjective income
-    "S5"
+    "S5",
+    # Most important problem of the country
+    "P3STGBS"
   )
 
 lb_variables_2016 <-
@@ -178,7 +183,9 @@ lb_variables_2016 <-
     # confidence in the political parties
     "P13STG",
     # subjective income
-    "S4"
+    "S4",
+    # Most important problem of the country
+    "P3STGBS"
   )
 
 lb_variables_2015 <-
@@ -220,7 +227,9 @@ lb_variables_2015 <-
     # confidence in the political parties
     "P19ST.C",
     # subjective income
-    "S4"
+    "S4",
+    # Most important problem of the country
+    "P9STGBS"
   )
 
 lb_variables_2013 <-
@@ -262,7 +271,9 @@ lb_variables_2013 <-
     # confidence in the political parties
     "P26TGB.G",
     # subjective income
-    "S6"
+    "S6",
+    # Most important problem of the country
+    "P9STGBS"
   )
 
 lb_variables_2011 <-
@@ -304,7 +315,9 @@ lb_variables_2011 <-
     # confidence in the political parties
     "P22ST.C",
     # subjective income
-    "S10ICC12"
+    "S10ICC12",
+    # Most important problem of the country
+    "P2ST"
   )
 
 lb_variables_2010 <-
@@ -346,7 +359,9 @@ lb_variables_2010 <-
     # confidence in the political parties
     "P20ST.C",
     # subjective income
-    "S4"
+    "S4",
+    # Most important problem of the country
+    "P2ST"
   )
 
 lb_variables_2009 <-
@@ -387,8 +402,10 @@ lb_variables_2009 <-
     "p26st.b",
     # confidence in the political parties
     "p26st.c",
-    # subjective income 
-    "s2"
+    # subjective income
+    "s2",
+    # Most important problem of the country
+    "p2st"
   )
 
 lb_variables_2008 <-
@@ -430,7 +447,9 @@ lb_variables_2008 <-
     # confidence in the political parties
     "p28st.c",
     # subjective income
-    "s2"
+    "s2",
+    # Most important problem of the country
+    "p9st"
   )
 
 # Select and rename variables and add a corresponding year variable
@@ -458,7 +477,8 @@ lb_2018 <- lb_2018_raw %>%
     trust_government = P15STGBSC.E,
     trust_judiciary = P15STGBSC.F,
     trust_parties = P15STGBSC.G,
-    income = S4
+    income = S4,
+    problem_country = P3STGBSC
   ) %>%
   # Add year column
   mutate(year = 2018, .before = id) %>%
@@ -475,9 +495,7 @@ lb_2018 <- lb_2018_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2017 <- lb_2017_raw %>%
   # Select columns of interest
@@ -502,7 +520,8 @@ lb_2017 <- lb_2017_raw %>%
     trust_government = P14ST.E,
     trust_judiciary = P14ST.F,
     trust_parties = P14ST.G,
-    income = S5
+    income = S5,
+    problem_country = P3STGBS
   ) %>%
   # Add year column
   mutate(year = 2017, .before = id) %>%
@@ -519,9 +538,7 @@ lb_2017 <- lb_2017_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2016 <- lb_2016_raw %>%
   # Select columns of interest
@@ -546,7 +563,8 @@ lb_2016 <- lb_2016_raw %>%
     trust_government = P13STE,
     trust_judiciary = P13STF,
     trust_parties = P13STG,
-    income = S4
+    income = S4,
+    problem_country = P3STGBS
   ) %>%
   # Add year column
   mutate(year = 2016, .before = id) %>%
@@ -563,9 +581,7 @@ lb_2016 <- lb_2016_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2015 <- lb_2015_raw %>%
   # Select columns of interest
@@ -590,7 +606,8 @@ lb_2015 <- lb_2015_raw %>%
     trust_government = P16ST.G,
     trust_judiciary = P16ST.H,
     trust_parties = P19ST.C,
-    income = S4
+    income = S4,
+    problem_country = P9STGBS
   ) %>%
   # Add year column
   mutate(year = 2015, .before = id) %>%
@@ -607,9 +624,7 @@ lb_2015 <- lb_2015_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2013 <- lb_2013_raw %>%
   # Select columns of interest
@@ -634,7 +649,8 @@ lb_2013 <- lb_2013_raw %>%
     trust_government = P26TGB.B,
     trust_judiciary = P26TGB.E,
     trust_parties = P26TGB.G,
-    income = S6
+    income = S6,
+    problem_country = P9STGBS
   ) %>%
   # Add year column
   mutate(year = 2013, .before = id) %>%
@@ -651,9 +667,7 @@ lb_2013 <- lb_2013_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2011 <- lb_2011_raw %>%
   # Select columns of interest
@@ -678,7 +692,8 @@ lb_2011 <- lb_2011_raw %>%
     trust_government = P20ST.A,
     trust_judiciary = P22ST.B,
     trust_parties = P22ST.C,
-    income = S10ICC12
+    income = S10ICC12,
+    problem_country = P2ST
   ) %>%
   # Add year column
   mutate(year = 2011, .before = id) %>%
@@ -695,9 +710,7 @@ lb_2011 <- lb_2011_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2010 <- lb_2010_raw %>%
   # Select columns of interest
@@ -722,7 +735,8 @@ lb_2010 <- lb_2010_raw %>%
     trust_government = P18ST.A,
     trust_judiciary = P20ST.B,
     trust_parties = P20ST.C,
-    income = S4
+    income = S4,
+    problem_country = P2ST
   ) %>%
   # Add year column
   mutate(year = 2010, .before = id) %>%
@@ -739,9 +753,7 @@ lb_2010 <- lb_2010_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2009 <- lb_2009_raw %>%
   # Select columns of interest
@@ -766,7 +778,8 @@ lb_2009 <- lb_2009_raw %>%
     trust_government = p24st.a,
     trust_judiciary = p26st.b,
     trust_parties = p26st.c,
-    income = s2
+    income = s2,
+    problem_country = p2st
   ) %>%
   # Add year column
   mutate(year = 2009, .before = id) %>%
@@ -783,9 +796,7 @@ lb_2009 <- lb_2009_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 lb_2008 <- lb_2008_raw %>%
   # Select columns of interest
@@ -810,7 +821,8 @@ lb_2008 <- lb_2008_raw %>%
     trust_government = p31s.ta,
     trust_judiciary = p28st.b,
     trust_parties = p28st.c,
-    income = s2
+    income = s2,
+    problem_country = p9st
   ) %>%
   # Add year column
   mutate(year = 2008, .before = id) %>%
@@ -827,9 +839,7 @@ lb_2008 <- lb_2008_raw %>%
                   format = "d",
                   flag = "0"
                 )
-              )
-    )
-  )
+              )))
 
 
 # Change variable data types ----------------------------------------------
@@ -849,17 +859,15 @@ lb_2008 <- lapply(lb_2008, as.numeric)
 
 # Combine yearly data frames into one large data frame
 lb <-
-  bind_rows(
-    lb_2018,
-    lb_2017,
-    lb_2016,
-    lb_2015,
-    lb_2013,
-    lb_2011,
-    lb_2010,
-    lb_2009,
-    lb_2008
-  )
+  bind_rows(lb_2018,
+            lb_2017,
+            lb_2016,
+            lb_2015,
+            lb_2013,
+            lb_2011,
+            lb_2010,
+            lb_2009,
+            lb_2008)
 
 # Remove/reset row names
 rownames(lb) <- NULL
@@ -886,15 +894,28 @@ lb <- lb %>%
     trust_government,
     trust_judiciary,
     trust_parties,
-    income
+    income,
+    problem_country
   )
 
-# Drop null values
-lb <- drop_na(lb)
+observation_count <- lb %>%
+  filter(country != 724, year != 2008, year != 2009)
+
+# Drop null values (ignoring problem_country column because the variable is only
+# used for exploratory data analysis)
+lb <- lb %>%
+  filter(country != 724)
+drop_na(names(lb)[!names(lb) %in% c("problem_country")])
+
+# Count missing values by variable
+sapply(lb, function(x)
+  sum(is.na(x)))
 
 summary(lb)
+unique(lb$country)
+
 
 # Save "lb" data frame as RData -------------------------------------------
 
 save(lb, file = "../data/latinobarometro.RData")
-write.csv(lb, file= "../data/latinobarometro.csv")
+write.csv(lb, file = "../data/latinobarometro.csv")
