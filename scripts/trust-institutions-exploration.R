@@ -63,14 +63,15 @@ trust_year_plot <- trust_year %>%
   ) %>%
   pivot_longer(!year, names_to = "variable", values_to = "proportion") %>%
   ggplot(mapping = aes(x = year, y = proportion)) +
-  geom_line(size = 1.1) +
-  geom_point(size = 3.1) +
-  scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
+  geom_line(size = 0.9, color = "#343779") +
+  geom_point(size = 2.7, color = "#343779") +
+  coord_cartesian(ylim=c(0.2, 0.6))+
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   scale_x_continuous(breaks = seq(from = 2010, to = 2018, by = 1)) +
   labs(
     x = " ",
     y = " ",
-    title = "Trust in Institutions in Latin America",
+    # title = "Trust in Institutions in Latin America",
     caption = "Source: Latinobarómetro Survey"
   ) +
   facet_wrap(# Reorder variables
@@ -82,7 +83,14 @@ trust_year_plot <- trust_year %>%
                  "Democracy")
     ),
     ncol = 1) +
-  theme_bw()
+  theme_bw() +
+  theme(
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    strip.background = element_rect(colour="black", fill="white"),
+    plot.caption = element_text(size=10, color="dimgray")
+  )
 
 trust_year_plot
 
@@ -90,7 +98,8 @@ ggsave(
   "trust-institutions.png",
   path = "../figures",
   plot = trust_year_plot,
-  dpi = 300,
-  width = 8,
-  height = 8
+  width = 16,
+  height = 4 / 4 * 16,
+  units = "cm",
+  dpi = 300
 )

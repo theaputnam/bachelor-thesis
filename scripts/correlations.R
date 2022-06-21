@@ -94,19 +94,32 @@ correlation_plot <- ggcorrplot(
   correlations,
   hc.order = TRUE,
   type = "lower",
-  colors = c("#1D87C4", "#FFFFFF", "#E0773A"),
+  colors = c("#333333", "#FFFFFF", "#343779"),
   lab = TRUE,
   insig = "blank",
-  legend.title = "Correlation\nCoefficient",
-  title = "Variable Correlations"
+  legend.title = "Correlation\nCoefficient"
 ) +
-  labs(caption = "Source: Latinobarómetro Survey")
+  labs(caption = "Source: Latinobarómetro Survey",
+       x="",
+       y="")+
+  theme_bw()+
+  theme(
+    legend.position = "bottom",
+    axis.text.y = element_text(size=13),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 13),
+    legend.title = element_blank(),
+    plot.caption = element_text(size = 13, color = "dimgray"),
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank())
 
 ggsave(
   "correlation-plot.png",
   path = "../figures",
   plot = correlation_plot,
-  dpi = 300,
-  width = 12,
-  height = 12
+  width = 25,
+  height = 25,
+  units = "cm",
+  dpi = 300
 )
+

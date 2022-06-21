@@ -74,17 +74,22 @@ head(problem_country_year)
 plot1 <- ggplot(data = problem_country_year,
                 mapping = aes(x = year,
                               y = `Crime / Public Security Fraction`)) +
-  geom_line(size = 1.1) +
-  geom_point(size = 3.1) +
+  geom_line(size = 1.1, color="#343779") +
+  geom_point(size = 3.1, color="#343779") +
   labs(
     x = "",
     y = "",
-    title = "Crime as the Most Important National Problem",
+    #title = "Crime as the Most Important National Problem",
     caption = "Source: Latinobarómetro Survey"
   ) +
   scale_x_continuous(breaks = seq(from = 2010, to = 2018, by = 1)) +
   scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-  theme_bw()
+  theme_bw()+ 
+  theme(
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    plot.caption = element_text(size=10, color="dimgray"))
 
 plot1
 
@@ -92,7 +97,8 @@ ggsave(
   "national-problem-year.png",
   path = "../figures",
   plot = plot1,
-  dpi = 300,
-  width = 8,
-  height = 6
+  width = 16,
+  height = 2.5 / 4 * 16,
+  units = "cm",
+  dpi = 300
 )

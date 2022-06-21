@@ -81,41 +81,58 @@ victim_count <- victim_year_country %>%
 # Graph 1: Type of Victimization by Country Over Time ---------------------
 
 victim_count_plot <- victim_count %>%
-  ggplot(mapping = aes(y = country,
-                       x = victim_proportion,
-                       fill = victim)) +
+  ggplot(
+    mapping = aes(
+      y = country,
+      x = victim_proportion,
+      fill = victim
+    )
+  ) +
   geom_col(position = position_fill(reverse = TRUE)) +
   scale_x_continuous(labels = scales::percent) +
   scale_fill_manual(
     values = c(
-      "You" = "black",
-      "Some relative" = "#1D87C4",
-      "Both of them" = "#E0773A",
-      "No" = "gray",
-      "Don't know" = "#d1d1d1",
-      "No answer" = "#f3f3f3",
-      "Not asked" = "red"
+      "#343779",
+      "#982062",
+      "#F86041",
+      "#cbcbcb",
+      "white",
+      "white",
+      "white"
     ),
     labels = c(
       "Respondent",
       "Relative",
       "Both",
-      "neither",
+      "Neither",
       "Don't Know",
       "No Answer",
       "Not Asked"
     )
   ) +
-  facet_wrap( ~ year) +
+  facet_wrap(~ year) +
   labs(
     x = "",
     y = "",
-    title = "Type of Victimization by Country Over Time",
+    # title = "Type of Victimization by Country Over Time",
     fill = "",
     caption = "Source: Latinobarómetro Survey"
   ) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(
+    strip.background = element_rect(colour = "black", fill = "white"),
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      size = 10
+    ),
+    legend.position = "bottom",
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    plot.caption = element_text(size=10, color="dimgray")
+  )
 
 victim_count_plot
 
@@ -123,9 +140,10 @@ ggsave(
   "victim-count.png",
   path = "../figures",
   plot = victim_count_plot,
-  dpi = 300,
-  width = 8,
-  height = 10
+  width = 16,
+  height = 24,
+  units = "cm",
+  dpi = 300
 )
 
 
@@ -136,34 +154,62 @@ victim_country_count_year <- victim_count %>%
   filter(!(year %in% c(2008, 2009))) %>%
   filter(!(victim %in% c("Don't know", "No answer", "Not asked"))) %>%
   group_by(year, country, victim) %>%
-  summarise(victim_count = sum(victim_count))
+  summarise(victim_count = sum(victim_count))%>%
+  drop_na()
 
 victim_count_year_plot <-
   ggplot(victim_country_count_year,
          mapping = aes(x = year, y = victim_count, color = victim)) +
-  geom_line(size = 0.8) +
-  geom_point(size = 1.8) +
+  geom_line(mapping = aes(linetype = victim), size = 0.8) +
+  geom_point(mapping = aes(shape = victim, fill = victim), size = 1.5) +
   scale_x_continuous(breaks = seq(from = 2010, to = 2018, by = 1)) +
+  scale_y_continuous(
+    labels = scales::comma) +
   scale_color_manual(
     values = c(
-      "You" = "black",
-      "Some relative" = "#1D87C4",
-      "Both of them" = "#E0773A",
-      "No" = "gray"
+      "#343779",
+      "#982062",
+      "#F86041",
+      "#cbcbcb"
     ),
-    labels = c("Respondent", "Relative", "Both", "neither")
+    labels = c("Respondent", "Relative", "Both", "Neither")
   ) +
+  scale_fill_manual(
+    values = c(
+      "#343779",
+      "#982062",
+      "#F86041",
+      "#cbcbcb"
+    ),
+    labels = c("Respondent", "Relative", "Both", "Neither")
+  ) +
+  scale_linetype_discrete(
+    labels = c("Respondent", "Relative", "Both", "Neither")
+  ) +
+  scale_shape_manual(
+    values = c(21, 22, 23, 24),
+    labels = c("Respondent", "Relative", "Both", "Neither")) +
   labs(
     x = "",
     y = "",
-    title = "Crime Victimization by Country",
+    # title = "Crime Victimization In Latin America",
+    caption = "Source: Latinobarómetro Survey",
     color = "",
-    caption = "Source: Latinobarómetro Survey"
+    linetype = "",
+    shape = "",
+    fill = ""
   ) +
   facet_wrap( ~ country, ncol = 3) +
   theme_bw() +
-  theme(legend.position = "bottom",
-        axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(
+    strip.background = element_rect(colour="black", fill="white"),
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    plot.caption = element_text(size=10, color="dimgray")
+   )
 
 victim_count_year_plot
 
@@ -171,11 +217,11 @@ ggsave(
   "victimization.png",
   path = "../figures",
   plot = victim_count_year_plot,
-  dpi = 300,
-  width = 8,
-  height = 10
+  width = 16,
+  height = 24,
+  units = "cm",
+  dpi = 300
 )
-
 
 # Victims of Crime over Time ----------------------------------------------
 
@@ -184,33 +230,72 @@ victim_count_year <- victim_count %>%
   filter(!(year %in% c(2008, 2009))) %>%
   filter(!(victim %in% c("Don't know", "No answer", "Not asked"))) %>%
   group_by(year, victim) %>%
-  summarise(victim_count = sum(victim_count))
+  summarise(victim_count = sum(victim_count)) %>%
+  ungroup() %>%
+  drop_na()
 
 
 total_victim_count <-
-  ggplot(victim_count_year,
-         mapping = aes(x = year, y = victim_count, color = victim)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 2.2) +
+  ggplot(
+    victim_count_year,
+    mapping = aes(
+      x = year,
+      y = victim_count,
+      color = victim
+    )
+  ) +
+  geom_line(mapping = aes(linetype = victim), size = 1.2) +
+  geom_point(mapping = aes(shape = victim, fill = victim), size = 2.7) +
   scale_x_continuous(breaks = seq(from = 2010, to = 2018, by = 1)) +
+  scale_y_continuous(
+    breaks = seq(from = 0, to = 15000, by = 5000),
+    labels = scales::comma
+  ) +
+  # scale_fill_grey(labels = c("Respondent", "Relative", "Both", "Neither")) +
+  # scale_color_grey(labels = c("Respondent", "Relative", "Both", "Neither")) +
   scale_color_manual(
     values = c(
-      "You" = "black",
-      "Some relative" = "#1D87C4",
-      "Both of them" = "#E0773A",
-      "No" = "gray"
+      "#343779",
+      "#982062",
+      "#F86041",
+      "#cbcbcb"
     ),
     labels = c("Respondent", "Relative", "Both", "Neither")
+  ) +
+  scale_fill_manual(
+    values = c(
+      "#343779",
+      "#982062",
+      "#F86041",
+      "#cbcbcb"
+    ),
+    labels = c("Respondent", "Relative", "Both", "Neither")
+  ) +
+  scale_linetype_discrete(
+    labels = c("Respondent", "Relative", "Both", "Neither")
+  ) +
+  scale_shape_manual(
+    labels = c("Respondent", "Relative", "Both", "Neither"),
+    values = c(21, 22, 23, 24)
   ) +
   labs(
     x = "",
     y = "",
-    title = "Crime Victimization In Latin America",
+    # title = "Crime Victimization In Latin America"
+    caption = "Source: Latinobarómetro Survey",
     color = "",
-    caption = "Source: Latinobarómetro Survey"
+    linetype = "",
+    shape = "",
+    fill = ""
   ) +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+    # Remove the vertical grid lines
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    plot.caption = element_text(size=10, color="dimgray")
+  )
 
 total_victim_count
 
@@ -218,7 +303,10 @@ ggsave(
   "total-victimization.png",
   path = "../figures",
   plot = total_victim_count,
-  dpi = 300,
-  width = 8,
-  height = 6
+  width = 16,
+  height = 2.5 / 4 * 16,
+  units = "cm",
+  dpi = 300
 )
+
+

@@ -18,6 +18,10 @@ library(stargazer)
 library(sandwich)
 library(lmtest)
 
+
+# install_github("markwestcott34/stargazer-booktabs")
+library(devtools)
+
 # Load data ---------------------------------------------------------------
 
 load("../data/latinobarometro-dummies.RData")
@@ -152,7 +156,7 @@ stargazer(
     "Bolivia",
     "Chile",
     "Colombia",
-    "Costa rica",
+    "Costa Rica",
     "Dominican Republic",
     "Ecuador",
     "El salvador",
@@ -168,6 +172,9 @@ stargazer(
   ),
   summary = TRUE,
   omit.summary.stat = "n",
+  font.size = "small",
+  no.space = TRUE,
+  align = TRUE,
   title = "Summary Statistics-Latinobarómetro Data",
   type = "html",
   out = "../figures/summary-statistics.html"
@@ -223,6 +230,9 @@ stargazer(
   title = "The Impact of Crime Victimization on Trust in Institutions-Probit Model",
   style = "aer",
   keep.stat = NULL,
+  align = TRUE,
+  font.size = "small",
+  no.space = TRUE,
   type = "html",
   out = "../figures/probit-table.html"
 )
@@ -275,7 +285,8 @@ stargazer(
     "Venezuela"
   ),
   title = "The Impact of Victimization on Institutions-Linear Probability Model",
-  style = "aer",
+  font.size = "small",
+  no.space = TRUE,
   keep.stat = NULL,
   type = "html",
   out = "../figures/linear-probability-table.html"
@@ -344,6 +355,8 @@ stargazer(
   title = "The Impact of Crime Victimization on Trust in Institutions-Probit Model With Robust Standard Errors",
   style = "aer",
   keep.stat = NULL,
+  font.size = "small",
+  no.space = TRUE,
   type = "html",
   out = "../figures/rse_probit-table.html"
 )
@@ -376,6 +389,7 @@ summary(probit_judiciary_margins)
 
 
 # Table
+
 export_summs(
   probit_police_margins,
   probit_democracy_margins,
@@ -383,15 +397,155 @@ export_summs(
   probit_judiciary_margins,
   model.names = c("Police", "Democracy", "Government", "Judiciary"),
   to.file = "html",
-  file.name = "../figures/marginal-effects-table.html",
-  number_format = "%.3f"
+  file.name = "../figures/marginal-effects-table-not-used.html",
+ number_format = "%.3f"
 )
 
+
 # Predicted probabilities victim ------------------------------------------
+library(prediction)
+
+# Prediction of trusting the police
+police<- prediction(probit_police) %>%
+  summarise(p_mean = mean(fitted))
+
+print(police)
+
+# probability of trusting the government
+gov <- prediction(probit_government) %>%
+  summarise(p_mean = mean(fitted))
+
+print(gov)
+
+# probability of trusting democracy 
+dem<- prediction(probit_democracy) %>%
+  summarise(p_mean = mean(fitted))
+
+print(dem)
+
+# probability of trusting the judiciary
+jud<- prediction(probit_judiciary) %>%
+  summarise(p_mean = mean(fitted))
+
+print(jud)
+
+# Victim predicted Probabilities Police
+
+victim_police <- prediction(probit_police) %>%
+  group_by(victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(victim_police)
+
+# Relative predicted Probabilities Police
+relative_police <- prediction(probit_police) %>%
+  group_by(relative_victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(relative_police)
+
+# General Trust predicted Probabilities Police
+general_police <- prediction(probit_police) %>%
+  group_by(trust) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(general_police)
+
+
+# Victim predicted Probabilities Government
+
+victim_gov <- prediction(probit_government) %>%
+  group_by(victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(victim_gov)
+
+
+# Relative predicted Probabilities Government
+relative_gov <- prediction(probit_government) %>%
+  group_by(relative_victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(relative_gov)
+
+# General Trust predicted Probabilities Government
+general_gov <- prediction(probit_government) %>%
+  group_by(trust) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(general_gov)
+
+
+# Victim predicted Probabilities Democracy
+
+victim_dem<- prediction(probit_democracy) %>%
+  group_by(victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(victim_dem)
+
+
+# Relative predicted Probabilities Democracy
+relative_dem <- prediction(probit_democracy) %>%
+  group_by(relative_victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(relative_dem)
+
+# General Trust predicted Probabilities Democracy
+general_dem<- prediction(probit_democracy) %>%
+  group_by(trust) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(general_dem)
+
+
+# Victim predicted Probabilities Judiciary
+
+victim_jud<- prediction(probit_judiciary) %>%
+  group_by(victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(victim_jud)
+
+
+# Relative predicted Probabilities Judiciary
+relative_jud <- prediction(probit_judiciary) %>%
+  group_by(relative_victim) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(relative_jud)
+
+# General Trust predicted Probabilities Judiciary
+general_jud<- prediction(probit_judiciary) %>%
+  group_by(trust) %>%
+  summarise(p_mean = mean(fitted))%>%
+  ungroup()
+
+print(general_jud)
+
+
+
+# Predicted Probability of  an Average Victim -----------------------------
+
+# not used in thesis. Average does not make sense. Not real people. Eg. cannot be 1/2 male
+
 
 # convert victim to factor
 lb_dummies2 <- data %>%
   mutate(victim = factor(victim))
+
 
 class(lb_dummies2$victim)
 
