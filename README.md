@@ -1,4 +1,5 @@
-# Bachelor Thesis: Crime victimization and trust in the police in Latin America.
+# Bachelor Thesis Thea Putnam: Crime Victimization and Trust in the Police in Latin America
+
 Research shows that social capital fuels economic growth in developing countries with weak institutions (Ahlerup et al., 2009). Social capital is widely acknowledged as the relationship between individuals. More specifically, Putnam (2000) defines social capital as “social networks and norms of reciprocity and trustworthiness” from social connections (p. 19). Existing literature reveals that crime can lower social capital not only through the occurrence itself but also may indirectly decrease social capital by reducing a victim’s trust in the police and other institutions (L. R. Blanco, 2013; Corbacho et al., 2015; Pazzona, 2020). Thus, studying the relationship between crime victimization and trust in institutions remains valuable, especially for countries with less developed economies, such as those in Latin America.
 
 Thus, this thesis examines the effect of crime victimization on trust in the police in Latin America by calculating directional effects, marginal effects, and predicted probabilities. I further extend the study by analyzing the effect of crime victimization on trust in other institutions such as democracy, the government, and the judiciary. Although the regression model incorporates many control variables, it likely fails to correct for all types of bias such as omitted variable bias. Nevertheless, findings of this thesis still provide meaningful insight about how crime can erode social capital by lowering the probability of trusting institutions of crime victims. This current study contributes to the previous literature by using more recent data from a survey not widely used for the exploration of crime victimization and trust in institutions. Additionally, the regression equation utilizes generalized trust as an independent variable, unlike past probit or logit models in existence. The results show significant negative directional effects of crime victimization on the probability of trusting the police and all other institutions. Furthermore, I find that crime victims are 4.7 percentage points less likely to trust the police on average than non-victims. Additionally, results show significant positive effects of general trust on the probability of trusting the police, democracy, the government, and the judiciary.
@@ -11,7 +12,9 @@ This figure confirms that this study does not suffer from multicollinearity. As 
     <img src="figures/correlation-plot.png" alt="Correlation Plot" width="512">
 </p
 
-<h2>Crime Index Rates</h2>
+<p> </p>
+
+## Crime Index Rates
 
 Latin American countries possess some of the highest crime rates in the world, measured by the World Bank’s 0–30 crime index. Several crime index values from Latin American countries largely surpass the world median of approximately 1.5, indicating that crime is tremendously problematic (World-Bank, 2017). 
 
@@ -19,7 +22,9 @@ Latin American countries possess some of the highest crime rates in the world, m
     <img src="figures/crime-rates.png" alt="Crime Rates Plot" width="512">
 </p
 
-<h2>The Most Important National Problem</h2>
+<p> </p>
+
+## The Most Important National Problem
 
 Between 2010 and 2018, about one quarter of the Latinobarómetro survey respondents perceived crime as the most important national problem (Latinobarómetro, 2010-2018). Although there has been a slight decline over the years, as depicted in the following figure, the percentage remains fairly consistent.
 
@@ -27,7 +32,9 @@ Between 2010 and 2018, about one quarter of the Latinobarómetro survey responde
     <img src="figures/national-problem-year.png" alt="National Problem" width="512">
 </p
 
-<h2>Total Victimization</h2>
+<p> </p>
+
+## Total Victimization
 
 This figure shows the composition of victimization in the survey sample. Relative victimization occurred most commonly, followed by individual victimization, and then by respondents who experienced both relative and individual victimization. This trend stays consistent for all years, 2010 through 2018
 
@@ -35,7 +42,9 @@ This figure shows the composition of victimization in the survey sample. Relativ
     <img src="figures/total-victimization.png" alt="Total Victimization" width="512">
 </p
 
-<h2>Trust in Insitutions</h2>
+<p> </p>
+
+## Trust in Insitutions
 
 This figure shows the percentage of survey respondents who trust the police, the judiciary, the government, and democracy between 2010 and 2018.
 
@@ -43,7 +52,9 @@ This figure shows the percentage of survey respondents who trust the police, the
     <img src="figures/trust-institutions.png" alt="Trust in Institutions" width="512">
 </p
 
-<h2>Type of Crime Victimization by Country</h2>
+<p> </p>
+
+## Type of Crime Victimization by Country
 
 This figure shows the distribution of different types of crime victimization by country and year. Years 2008 and 2009 appear significantly different, indicating that the survey question or data collection method must have chaneged. Thus, this study excludes years 2008 and 2009.
 
@@ -52,7 +63,9 @@ This figure shows the distribution of different types of crime victimization by 
     <img src="figures/victim-count.png" alt="Victim Count" width="512">
 </p
 
-<h2>Crime Victimization by Country</h2>
+<p> </p>
+
+## Crime Victimization by Country
 
 This figure shows crime victimization by country over time.
 
@@ -60,7 +73,9 @@ This figure shows crime victimization by country over time.
     <img src="figures/victimization.png" alt="Victimization" width="512">
 </p
 
-<h2>References</h2>
+<p> </p>
+
+## References
 
 Ahlerup, P., Olsson, O., & Yanagizawa, D. (2009). Social capital vs institutions in the growth process. European Journal of Political Economy, 25(1), 1–14. https://doi.org/10.1016/j.ejpoleco.2008.09.008
 
